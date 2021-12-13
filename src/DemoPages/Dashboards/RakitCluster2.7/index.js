@@ -272,7 +272,7 @@ export default class RakitCluster10 extends Component {
                                 <div className="slider-item">                      
                                     <Row>
                                         <Col lg="12" md="12" sm="12">
-                                            <h1 className="text-center" style={{color:'black'}}>BEST PERFOMANCE Cluster 2.7</h1>
+                                            <h1 className="text-center" style={{color:'black'}}>BEST PERFOMANCE CLUSTER 2.7</h1>
                                         </Col>
                                     </Row>
                                     <Row>
@@ -283,12 +283,12 @@ export default class RakitCluster10 extends Component {
                                     <Row style={{marginTop: 100}}>
                                         {this.state.itemPerfomances.map((itemPerfomance) => ( 
                                         <Col lg="3" md="3" sm="12">
-                                            <Card className="card-shadow-secondary border bg-happy-green text-white" outline color="secondary">
+                                            <Card className={itemPerfomance.vf_proses == "RAKIT_REP" ? "card-shadow-secondary border bg-happy-green text-white" : itemPerfomance.vf_proses == "PB" ? "card-shadow-secondary border bg-arielle-smile text-white" : itemPerfomance.vf_proses == "POLESRK" ? "card-shadow-secondary border bg-sunny-morning text-white" : "card-shadow-secondary border bg-mixed-hopes text-white"} outline color="secondary">
                                                 <CardHeader>
-                                                    <h1 className="text-center">{itemPerfomance.vf_proses}</h1>
+                                                    <h1 className="text-center">{itemPerfomance.vf_proses == "RAKIT_REP" ? "RAKIT REPARASI" : itemPerfomance.vf_proses == "PB" ? "PASANG BATU" : itemPerfomance.vf_proses == "POLESRK" ? "POLES RANGKA" : "POLES BRJ"}</h1>
                                                 </CardHeader>
                                                 <CardBody>
-                                                    <center><img src={itemPerfomance.vf_foto == null ? 'https://myapps.cmk.co.id/hrd/image/'+itemPerfomance.vf_tukang+'.jpg' : itemPerfomance.vf_foto == "" ? 'https://myapps.cmk.co.id/hrd/image/'+itemPerfomance.vf_tukang+'.jpg' : 'https://myapps.cmk.co.id/hrd/image/'+itemPerfomance.vf_foto} alt='' style={{height:104, width:125}} /></center>
+                                                    <center><img src={itemPerfomance.vf_foto == null ? 'https://myapps.cmk.co.id/hrd/image/'+itemPerfomance.vf_tukang+'.jpg' : itemPerfomance.vf_foto == "" ? 'https://myapps.cmk.co.id/hrd/image/'+itemPerfomance.vf_tukang+'.jpg' : 'https://myapps.cmk.co.id/hrd/image/'+itemPerfomance.vf_foto} alt={itemPerfomance.vf_foto == "" ? itemPerfomance.vf_tukang : itemPerfomance.vf_foto == null ? itemPerfomance.vf_tukang : itemPerfomance.vf_foto} style={{height:104, width:125}} /></center>
                                                     <h4 className="text-center">{itemPerfomance.vf_tukang}</h4>
                                                     <h4 className="text-center">{itemPerfomance.vf_nama_tukang}</h4>
                                                 </CardBody>
@@ -415,54 +415,58 @@ export default class RakitCluster10 extends Component {
                                         </Col>
                                     </Row>
                                     <Row>
-                                        <Col lg="12" md="12" sm="12">                                                  
-                                            <Table responsive className="mb-0">
-                                                <thead>
-                                                    <tr>
-                                                        <th style={{
-                                                        border: '1px solid white',
-                                                        background: 'rgb(250,105,105)',
-                                                        color: 'white',
-                                                        fontWeight: 'bold',
-                                                        }}>Cluster</th>
-                                                        <th style={{
-                                                        border: '1px solid white',
-                                                        background: 'rgb(250,105,105)',
-                                                        color: 'white',
-                                                        fontWeight: 'bold',
-                                                        }}>Proses</th>
-                                                        <th style={{
-                                                        border: '1px solid white',
-                                                        background: 'rgb(250,105,105)',
-                                                        color: 'white',
-                                                        fontWeight: 'bold',
-                                                        }}>Nama</th>
-                                                        <th style={{
-                                                        border: '1px solid white',
-                                                        background: 'rgb(250,105,105)',
-                                                        color: 'white',
-                                                        fontWeight: 'bold',
-                                                        }}>Total Poin</th>
-                                                        <th style={{
-                                                        border: '1px solid white',
-                                                        background: 'rgb(250,105,105)',
-                                                        color: 'white',
-                                                        fontWeight: 'bold',
-                                                        }}>Pencapaian</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {this.state.itemPolesRangkas.map((itemPolesRangka) => (
+                                        <Col lg="12" md="12" sm="12">
+                                            {/* <Card className="mt-3"> */}
+                                                {/* <CardBody>                                                     */}
+                                                    <Table responsive className="mb-0">
+                                                        <thead>
                                                         <tr>
-                                                            <th scope="row">{itemPolesRangka.vf_cluster}</th>
-                                                            <td>{itemPolesRangka.vf_proses}</td>
-                                                            <td>{itemPolesRangka.vf_nama_tukang}</td>
-                                                            <td>{itemPolesRangka.vf_actual}</td>
-                                                            <td><CountUp start={0} end={itemPolesRangka.vf_performance} separator="," decimals={1} decimal="." prefix="" useEasing={false} suffix="%" duration="0"/></td>
-                                                        </tr>
-                                                    ))}
-                                                </tbody>
-                                            </Table>
+                                                                <th style={{
+                                                                border: '1px solid white',
+                                                                background: 'rgb(250,105,105)',
+                                                                color: 'white',
+                                                                fontWeight: 'bold',
+                                                                }}>Cluster</th>
+                                                                <th style={{
+                                                                border: '1px solid white',
+                                                                background: 'rgb(250,105,105)',
+                                                                color: 'white',
+                                                                fontWeight: 'bold',
+                                                                }}>Proses</th>
+                                                                <th style={{
+                                                                border: '1px solid white',
+                                                                background: 'rgb(250,105,105)',
+                                                                color: 'white',
+                                                                fontWeight: 'bold',
+                                                                }}>Nama</th>
+                                                                <th style={{
+                                                                border: '1px solid white',
+                                                                background: 'rgb(250,105,105)',
+                                                                color: 'white',
+                                                                fontWeight: 'bold',
+                                                                }}>Total Poin</th>
+                                                                <th style={{
+                                                                border: '1px solid white',
+                                                                background: 'rgb(250,105,105)',
+                                                                color: 'white',
+                                                                fontWeight: 'bold',
+                                                                }}>Pencapaian</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {this.state.itemPolesRangkas.map((itemPolesRangka) => (
+                                                            <tr>
+                                                                <th scope="row">{itemPolesRangka.vf_cluster}</th>
+                                                                <td>{itemPolesRangka.vf_proses}</td>
+                                                                <td>{itemPolesRangka.vf_nama_tukang}</td>
+                                                                <td>{itemPolesRangka.vf_actual}</td>
+                                                                <td><CountUp start={0} end={itemPolesRangka.vf_performance} separator="," decimals={1} decimal="." prefix="" useEasing={false} suffix="%" duration="0"/></td>
+                                                            </tr>
+                                                            ))}
+                                                        </tbody>
+                                                    </Table>
+                                                {/* </CardBody> */}
+                                            {/* </Card> */}
                                         </Col>
                                     </Row>
                                 </div>
@@ -477,54 +481,58 @@ export default class RakitCluster10 extends Component {
                                         </Col>
                                     </Row>
                                     <Row>
-                                        <Col lg="12" md="12" sm="12"> 
-                                            <Table responsive className="mb-0">
-                                                <thead>
-                                                <tr>
-                                                    <th style={{
-                                                    border: '1px solid white',
-                                                    background: 'rgb(246,195,12)',
-                                                    color: 'white',
-                                                    fontWeight: 'bold',
-                                                    }}>Cluster</th>
-                                                    <th style={{
-                                                    border: '1px solid white',
-                                                    background: 'rgb(246,195,12)',
-                                                    color: 'white',
-                                                    fontWeight: 'bold',
-                                                    }}>Proses</th>
-                                                    <th style={{
-                                                    border: '1px solid white',
-                                                    background: 'rgb(246,195,12)',
-                                                    color: 'white',
-                                                    fontWeight: 'bold',
-                                                    }}>Nama</th>
-                                                    <th style={{
-                                                    border: '1px solid white',
-                                                    background: 'rgb(246,195,12)',
-                                                    color: 'white',
-                                                    fontWeight: 'bold',
-                                                    }}>Total Poin</th>
-                                                    <th style={{
-                                                    border: '1px solid white',
-                                                    background: 'rgb(246,195,12)',
-                                                    color: 'white',
-                                                    fontWeight: 'bold',
-                                                    }}>Pencapaian</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {this.state.itemPBs.map((itemPB) => (
-                                                    <tr>
-                                                        <th scope="row">{itemPB.vf_cluster}</th>
-                                                        <td>{itemPB.vf_proses}</td>
-                                                        <td>{itemPB.vf_nama_tukang}</td>
-                                                        <td>{itemPB.vf_actual}</td>
-                                                        <td><CountUp start={0} end={itemPB.vf_performance} separator="," decimals={1} decimal="." prefix="" useEasing={false} suffix="%" duration="0"/></td>
-                                                    </tr>
-                                                    ))}
-                                                </tbody>
-                                            </Table>
+                                        <Col lg="12" md="12" sm="12">
+                                            {/* <Card className="mt-3">
+                                                <CardBody>                                                     */}
+                                                    <Table responsive className="mb-0">
+                                                        <thead>
+                                                        <tr>
+                                                            <th style={{
+                                                            border: '1px solid white',
+                                                            background: 'rgb(246,195,12)',
+                                                            color: 'white',
+                                                            fontWeight: 'bold',
+                                                            }}>Cluster</th>
+                                                            <th style={{
+                                                            border: '1px solid white',
+                                                            background: 'rgb(246,195,12)',
+                                                            color: 'white',
+                                                            fontWeight: 'bold',
+                                                            }}>Proses</th>
+                                                            <th style={{
+                                                            border: '1px solid white',
+                                                            background: 'rgb(246,195,12)',
+                                                            color: 'white',
+                                                            fontWeight: 'bold',
+                                                            }}>Nama</th>
+                                                            <th style={{
+                                                            border: '1px solid white',
+                                                            background: 'rgb(246,195,12)',
+                                                            color: 'white',
+                                                            fontWeight: 'bold',
+                                                            }}>Total Poin</th>
+                                                            <th style={{
+                                                            border: '1px solid white',
+                                                            background: 'rgb(246,195,12)',
+                                                            color: 'white',
+                                                            fontWeight: 'bold',
+                                                            }}>Pencapaian</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {this.state.itemPBs.map((itemPB) => (
+                                                            <tr>
+                                                                <th scope="row">{itemPB.vf_cluster}</th>
+                                                                <td>{itemPB.vf_proses}</td>
+                                                                <td>{itemPB.vf_nama_tukang}</td>
+                                                                <td>{itemPB.vf_actual}</td>
+                                                                <td><CountUp start={0} end={itemPB.vf_performance} separator="," decimals={1} decimal="." prefix="" useEasing={false} suffix="%" duration="0"/></td>
+                                                            </tr>
+                                                            ))}
+                                                        </tbody>
+                                                    </Table>
+                                                {/* </CardBody>
+                                            </Card> */}
                                         </Col>
                                     </Row>
                                 </div>
@@ -540,53 +548,57 @@ export default class RakitCluster10 extends Component {
                                     </Row>
                                     <Row>
                                         <Col lg="12" md="12" sm="12">
-                                            <Table responsive className="mb-0">
-                                                <thead>
-                                                <tr>
-                                                        <th style={{
-                                                        border: '1px solid white',
-                                                        background: 'rgb(69,234,160)',
-                                                        color: 'white',
-                                                        fontWeight: 'bold',
-                                                        }}>Cluster</th>
-                                                        <th style={{
-                                                        border: '1px solid white',
-                                                        background: 'rgb(69,234,160)',
-                                                        color: 'white',
-                                                        fontWeight: 'bold',
-                                                        }}>Proses</th>
-                                                        <th style={{
-                                                        border: '1px solid white',
-                                                        background: 'rgb(69,234,160)',
-                                                        color: 'white',
-                                                        fontWeight: 'bold',
-                                                        }}>Nama</th>
-                                                        <th style={{
-                                                        border: '1px solid white',
-                                                        background: 'rgb(69,234,160)',
-                                                        color: 'white',
-                                                        fontWeight: 'bold',
-                                                        }}>Total Poin</th>
-                                                        <th style={{
-                                                        border: '1px solid white',
-                                                        background: 'rgb(69,234,160)',
-                                                        color: 'white',
-                                                        fontWeight: 'bold',
-                                                        }}>Pencapaian</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {this.state.itemPolesBrjs.map((itemPolesBrj) => (
-                                                    <tr>
-                                                        <th scope="row">{itemPolesBrj.vf_cluster}</th>
-                                                        <td>{itemPolesBrj.vf_proses}</td>
-                                                        <td>{itemPolesBrj.vf_nama_tukang}</td>
-                                                        <td>{itemPolesBrj.vf_actual}</td>
-                                                        <td><CountUp start={0} end={itemPolesBrj.vf_performance} separator="," decimals={1} decimal="." prefix="" useEasing={false} suffix="%" duration="0"/></td>
-                                                    </tr>
-                                                    ))}
-                                                </tbody>
-                                            </Table>
+                                            {/* <Card className="mt-3">
+                                                <CardBody>                                                     */}
+                                                    <Table responsive className="mb-0">
+                                                        <thead>
+                                                        <tr>
+                                                                <th style={{
+                                                                border: '1px solid white',
+                                                                background: 'rgb(69,234,160)',
+                                                                color: 'white',
+                                                                fontWeight: 'bold',
+                                                                }}>Cluster</th>
+                                                                <th style={{
+                                                                border: '1px solid white',
+                                                                background: 'rgb(69,234,160)',
+                                                                color: 'white',
+                                                                fontWeight: 'bold',
+                                                                }}>Proses</th>
+                                                                <th style={{
+                                                                border: '1px solid white',
+                                                                background: 'rgb(69,234,160)',
+                                                                color: 'white',
+                                                                fontWeight: 'bold',
+                                                                }}>Nama</th>
+                                                                <th style={{
+                                                                border: '1px solid white',
+                                                                background: 'rgb(69,234,160)',
+                                                                color: 'white',
+                                                                fontWeight: 'bold',
+                                                                }}>Total Poin</th>
+                                                                <th style={{
+                                                                border: '1px solid white',
+                                                                background: 'rgb(69,234,160)',
+                                                                color: 'white',
+                                                                fontWeight: 'bold',
+                                                                }}>Pencapaian</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {this.state.itemPolesBrjs.map((itemPolesBrj) => (
+                                                            <tr>
+                                                                <th scope="row">{itemPolesBrj.vf_cluster}</th>
+                                                                <td>{itemPolesBrj.vf_proses}</td>
+                                                                <td>{itemPolesBrj.vf_nama_tukang}</td>
+                                                                <td>{itemPolesBrj.vf_actual}</td>
+                                                                <td><CountUp start={0} end={itemPolesBrj.vf_performance} separator="," decimals={1} decimal="." prefix="" useEasing={false} suffix="%" duration="0"/></td>
+                                                            </tr>
+                                                            ))}
+                                                        </tbody>
+                                                    </Table>
+                                                {/* </CardBody>
+                                            </Card> */}
                                         </Col>
                                     </Row>
                                 </div>
