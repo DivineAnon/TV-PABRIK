@@ -222,7 +222,7 @@ export default class RakitCluster10 extends Component {
             dots: true,
             fade: true,
             infinite: true,
-            autoplaySpeed: 60000,
+            autoplaySpeed: 10000,
             slidesToShow: 1,
             slidesToScroll: 1,
             initialSlide: 0,
