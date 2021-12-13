@@ -185,7 +185,7 @@ const AppMain = () => {
 
 
             <Route exact path="/" render={() => (
-                <Redirect to="/dashboards/rakit-cluster-10"/>
+                <Redirect to="/dashboards/cluster-10"/>
             )}/>
             <ToastContainer/>
         </Fragment>

@@ -48,8 +48,25 @@ const Dashboards = ({ match }) => (
       <div className="app-main__outer">
       {/* <Route path={`${match.url}/perfomance`} component={PerfomanceDashboard}/> */}
       {/* <Route path={`${match.url}/dobrj`} component={DOBRJDashboard}/> */}
-      <Route path={`${match.url}/rakit-cluster-10`} component={RakitCluster10}/>
-      <Route path={`${match.url}/rakit-cluster-21`} component={RakitCluster21}/>
+      <Route path={`${match.url}/cluster-10`} component={RakitCluster10}/>
+      <Route path={`${match.url}/cluster-21`} component={RakitCluster21}/>
+      <Route path={`${match.url}/cluster-22`} component={RakitCluster22}/>
+      <Route path={`${match.url}/cluster-23`} component={RakitCluster23}/>
+      <Route path={`${match.url}/cluster-24`} component={RakitCluster24}/>
+      <Route path={`${match.url}/cluster-25`} component={RakitCluster25}/>
+      <Route path={`${match.url}/cluster-26`} component={RakitCluster26}/>
+      <Route path={`${match.url}/cluster-27`} component={RakitCluster27}/>
+      <Route path={`${match.url}/cluster-31`} component={RakitCluster31}/>
+      <Route path={`${match.url}/cluster-32`} component={RakitCluster32}/>
+      <Route path={`${match.url}/cluster-33`} component={RakitCluster33}/>
+      <Route path={`${match.url}/cluster-34`} component={RakitCluster34}/>
+      <Route path={`${match.url}/cluster-35`} component={RakitCluster35}/>
+      <Route path={`${match.url}/cluster-41`} component={RakitCluster41}/>
+      <Route path={`${match.url}/cluster-42`} component={RakitCluster42}/>
+      <Route path={`${match.url}/cluster-43`} component={RakitCluster43}/>
+      <Route path={`${match.url}/cluster-44`} component={RakitCluster44}/>
+      <Route path={`${match.url}/cluster-45`} component={RakitCluster45}/>
+      <Route path={`${match.url}/cluster-46`} component={RakitCluster46}/>
         {/* <div className="app-main__inner"> */}
           {/* <Route path={`${match.url}/dobrj`} component={DOBRJDashboard}/> */}
           {/* <Route path={`${match.url}/test`} component={TestDashboard}/>

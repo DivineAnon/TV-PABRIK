@@ -19,81 +19,6 @@ import Loader from "react-loaders";
 import Slider from "react-slick";
 import CountUp from "react-countup";
 
-const data = {
-    labels: ["Rakit", "Poles Rangka", "Pasang Batu", "Poles BRJ"],
-    datasets: [
-        {
-            label: "Perajin A",
-            data: [33, 53, 85, 41, 44, 65],
-            fill: true,
-            backgroundColor: "rgba(67,194,245,1)",
-            borderColor: "rgba(75,192,192,1)"
-        },
-        {
-            label: "Perajin B",
-            data: [33, 25, 35, 51, 54, 76],
-            fill: true,
-            backgroundColor: "rgba(255,192,0,1)",
-            borderColor: "#742774",
-        },
-        {
-            label: "Perajin C",
-            data: [33, 53, 85, 41, 44, 65],
-            fill: true,
-            backgroundColor: "rgba(69,234,160,1)",
-            borderColor: "rgba(75,192,192,1)"
-        },
-    ],
-  };
-
-const data1 = {
-    labels: ["01/11/2021", "02/11/2021", "03/11/2021", "04/11/2021", "05/11/2021", "06/11/2021", "07/11/2021", "08/11/2021", "09/11/2021", "10/11/2021", "11/11/2021", "12/11/2021", "13/11/2021", "14/11/2021", "15/11/2021", "16/11/2021", "17/11/2021", "18/11/2021", "19/11/2021", "20/11/2021", "21/11/2021", "22/11/2021", "23/11/2021", "24/11/2021", "25/11/2021", "26/11/2021", "27/11/2021", "28/11/2021", "29/11/2021", "30/11/2021"],
-    datasets: [
-        {
-            label: "TARGET",
-            fill: true,
-            lineTension: 0.1,
-            backgroundColor: "rgba(30,144,255,0.2)",
-            borderColor: "rgba(75,192,192,1)",
-            borderCapStyle: "round",
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: "miter",
-            pointBorderColor: "rgba(30,144,255,0.2)",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(30,144,255,0.2)",
-            pointHoverBorderColor: "rgba(220,220,220,1)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
-            pointHitRadius: 10,
-            data: [80, 70, 90, 90, 60, 70, 60, 70, 30, 40, 70, 60, 90, 90, 60, 60, 50, 60, 30, 40, 70, 60, 90, 90, 60, 60, 50, 60, 90, 40],
-        },
-        {
-            label: "BRJ",
-            fill: true,
-            lineTension: 0.1,
-            backgroundColor: "rgba(255,140,0,0.6)",
-            borderColor: "rgba(255,255,255,1)",
-            borderCapStyle: "round",
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: "miter",
-            pointBorderColor: "rgba(255,140,0,0.6)",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(255,140,0,0.6)",
-            pointHoverBorderColor: "rgba(220,220,220,1)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
-            pointHitRadius: 10,
-            data: [65, 59, 80, 81, 56, 55, 40, 50, 20, 30, 65, 59, 80, 81, 56, 55, 40, 50, 20, 30, 65, 59, 80, 81, 56, 55, 40, 50, 80, 20],
-        },
-    ],
-}
-
 export default class RakitCluster10 extends Component {
     constructor() {
         super();
@@ -125,99 +50,154 @@ export default class RakitCluster10 extends Component {
       }
 
       async getDataPerfomance(){
-        const url = 'http://localhost:8090/api/ranking-coba1';
-        // const urlprod = 'http://103.247.217.10:8091/api/ranking-cluster-10';
-        const res = await axios.get(url);
+        // const url = 'http://localhost:8090/api/ranking-coba1';
+        const urlprod = 'http://103.247.217.10:8091/api/ranking-cluster-10';
+        const res = await axios.get(urlprod);
         // console.log(res.data);
         this.setState({itemPerfomances: res.data, DataisLoaded: true});
       }
 
       async getDataPoin(){
-        const url = 'http://localhost:8090/api/poin-coba2';
-        // const urlprod = 'http://103.247.217.10:8091/api/poin-cluster-10';
-        await axios.get(url)
+        // const url = 'http://localhost:8090/api/poin-coba2';
+        const urlprod = 'http://103.247.217.10:8091/api/poin-cluster-10';
+        await axios.get(urlprod)
         .then(res => {
-            const poin = res.data;
+            const poins = res.data;
             let labels = [];
             let data = [];
-            poin.foreach(element => {
-                labels.push(element.nama_perajin);
-                data.push(element.poin);
+            poins.forEach(element => {
+                labels.push(element.vf_nama_tukang);
+                data.push(element.vf_actual);
             })
-            console.log(poin);
+            console.log(labels[0]);
+            console.log(data);
             this.setState({
                 chartDataPoin: {
-                    labels: labels,
-                    datasets: [
+                    labels: ["Rakit", "Poles Rangka", "Pasang Batu", "Poles BRJ"],
+                    datasets: 
+                    [                        
                         {
-                            label: "Poin",
+                            label: labels,
                             data: data,
-                            backgroundColor: [
-                            ]
-                        }
+                            fill: true,
+                            backgroundColor: "rgba(67,194,245,1)",
+                            borderColor: "rgba(75,192,192,1)",
+                        },                 
+                        {
+                            label: labels,
+                            data: data,
+                            fill: true,
+                            backgroundColor: "rgba(255,192,0,1)",
+                            borderColor: "#742774",
+                        },                 
+                        {
+                            label: labels,
+                            data: data,
+                            fill: true,
+                            backgroundColor: "rgba(69,234,160,1)",
+                            borderColor: "rgba(75,192,192,1)",
+                        },
                     ]
                 },
                 DataisLoaded: true
             })
         });
-        // console.log(res.data);
+        // console.log(this.state.chartDataPoin);
         // this.setState({items: res.data, DataisLoaded: true});
       }
 
       async getDataRakit(){
-        const url = 'http://localhost:8090/api/data-rakit-coba3';
-        // const urlprod = 'http://103.247.217.10:8091/api/data-rakit-cluster-10';
-        const res = await axios.get(url);
+        // const url = 'http://localhost:8090/api/data-rakit-coba3';
+        const urlprod = 'http://103.247.217.10:8091/api/data-rakit-cluster-10';
+        const res = await axios.get(urlprod);
         // console.log(res.data);
         this.setState({itemRakits: res.data, DataisLoaded: true});
       }
 
       async getDataPolesRangka(){
-        const url = 'http://localhost:8090/api/data-poles-rangka-coba4';
-        // const urlprod = 'http://103.247.217.10:8091/api/data-poles-rangka-cluster-10';
-        const res = await axios.get(url);
+        // const url = 'http://localhost:8090/api/data-poles-rangka-coba4';
+        const urlprod = 'http://103.247.217.10:8091/api/data-poles-rangka-cluster-10';
+        const res = await axios.get(urlprod);
         // console.log(res.data);
         this.setState({itemPolesRangkas: res.data, DataisLoaded: true});
       }
 
       async getDataPasangBatu(){
-        const url = 'http://localhost:8090/api/data-pasang-batu-coba5';
-        // const urlprod = 'http://103.247.217.10:8091/api/data-pasang-batu-cluster-10';
-        const res = await axios.get(url);
+        // const url = 'http://localhost:8090/api/data-pasang-batu-coba5';
+        const urlprod = 'http://103.247.217.10:8091/api/data-pasang-batu-cluster-10';
+        const res = await axios.get(urlprod);
         // console.log(res.data);
         this.setState({itemPBs: res.data, DataisLoaded: true});
       }
 
       async getDataPolesBRJ(){
-        const url = 'http://localhost:8090/api/data-poles-brj-coba6';
-        // const urlprod = 'http://103.247.217.10:8091/api/data-poles-brj-cluster-10';
-        const res = await axios.get(url);
+        // const url = 'http://localhost:8090/api/data-poles-brj-coba6';
+        const urlprod = 'http://103.247.217.10:8091/api/data-poles-brj-cluster-10';
+        const res = await axios.get(urlprod);
         // console.log(res.data);
         this.setState({itemPolesBrjs: res.data, DataisLoaded: true});
       }
 
       async getBRJ(){
-        const url = 'http://localhost:8090/api/brj-coba7';
-        // const urlprod = 'http://103.247.217.10:8091/api/brj-cluster-10';
-        await axios.get(url)
+        // const url = 'http://localhost:8090/api/brj-coba7';
+        const urlprod = 'http://103.247.217.10:8091/api/brj-cluster-10';
+        await axios.get(urlprod)
         .then(res => {
             const brj = res.data;
-            let labels = [];
+            let dates = [];
+            let targets = [];
             let data = [];
-            brj.foreach(element => {
-                labels.push(element.nama_perajin);
-                data.push(element.brj);
+            brj.forEach(element => {
+                dates.push(element.m_tanggal)
+                targets.push(element.m_target);
+                data.push(element.m_pcs);
             })
-            console.log(brj);
+            // console.log(brj);
             this.setState({
                 chartDataBRJ: {
-                    labels: labels,
+                    labels: dates,
                     datasets: [
                         {
+                            label: "TARGET",
+                            fill: true,
+                            lineTension: 0.1,
+                            backgroundColor: "rgba(30,144,255,0.2)",
+                            borderColor: "rgba(75,192,192,1)",
+                            borderCapStyle: "round",
+                            borderDash: [],
+                            borderDashOffset: 0.0,
+                            borderJoinStyle: "miter",
+                            pointBorderColor: "rgba(30,144,255,0.2)",
+                            pointBackgroundColor: "#fff",
+                            pointBorderWidth: 1,
+                            pointHoverRadius: 5,
+                            pointHoverBackgroundColor: "rgba(30,144,255,0.2)",
+                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                            pointHoverBorderWidth: 2,
+                            pointRadius: 1,
+                            pointHitRadius: 10,
+                            data: targets,
+                        },
+                        {
                             label: "BRJ",
+                            fill: true,
+                            lineTension: 0.1,
+                            backgroundColor: "rgba(255,140,0,0.6)",
+                            borderColor: "rgba(255,255,255,1)",
+                            borderCapStyle: "round",
+                            borderDash: [],
+                            borderDashOffset: 0.0,
+                            borderJoinStyle: "miter",
+                            pointBorderColor: "rgba(255,140,0,0.6)",
+                            pointBackgroundColor: "#fff",
+                            pointBorderWidth: 1,
+                            pointHoverRadius: 5,
+                            pointHoverBackgroundColor: "rgba(255,140,0,0.6)",
+                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                            pointHoverBorderWidth: 2,
+                            pointRadius: 1,
+                            pointHitRadius: 10,
                             data: data,
-                            backgroundColor: [
-                            ]
                         }
                     ]
                 },
@@ -308,12 +288,12 @@ export default class RakitCluster10 extends Component {
                                                     <h1 className="text-center">{itemPerfomance.vf_proses}</h1>
                                                 </CardHeader>
                                                 <CardBody>
-                                                    <img src={'https://myapps.cmk.co.id/hrd/image/'+itemPerfomance.vf_tukang+'.jpg'} alt='' style={{height:104, width:125}} />
-                                                    <h3 className="text-center">{itemPerfomance.vf_tukang}</h3>
-                                                    <h3 className="text-center">{itemPerfomance.vf_nama_tukang}</h3>
+                                                    <center><img src={'https://myapps.cmk.co.id/hrd/image/'+itemPerfomance.vf_tukang+'.jpg'} alt='' style={{height:104, width:125}} /></center>
+                                                    <h4 className="text-center">{itemPerfomance.vf_tukang}</h4>
+                                                    <h4 className="text-center">{itemPerfomance.vf_nama_tukang}</h4>
                                                 </CardBody>
                                                 <CardFooter>
-                                                    <h3 className="text-center"><CountUp start={0} end={itemPerfomance.vf_performance} separator="," decimals={0} decimal="." prefix="" useEasing={false} suffix="%" duration="0"/></h3>
+                                                    <h4 className="text-center"><CountUp start={0} end={itemPerfomance.vf_performance} separator="," decimals={0} decimal="." prefix="" useEasing={false} suffix="%" duration="0"/></h4>
                                                 </CardFooter>
                                             </Card>
                                         </Col>
@@ -333,7 +313,7 @@ export default class RakitCluster10 extends Component {
                                     <Row>
                                         <Col lg="12">
                                             {/* <Card className="mt-3"> */}
-                                                <HorizontalBar data={data} width={1400} height={540} options={
+                                                <HorizontalBar data={this.state.chartDataPoin} width={1400} height={540} options={
                                                     {
                                                         maintainAspectRatio: true, 
                                                         scales: {
@@ -636,7 +616,7 @@ export default class RakitCluster10 extends Component {
                                     <Row>
                                         <Col lg="12">
                                             {/* <Card className="mt-3"> */}
-                                                <Line data={data1} width={1400} height={500} options={
+                                                <Line data={this.state.chartDataBRJ} width={1400} height={500} options={
                                                     {
                                                         maintainAspectRatio: true, 
                                                         scales: {

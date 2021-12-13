@@ -19,87 +19,18 @@ import Loader from "react-loaders";
 import Slider from "react-slick";
 import CountUp from "react-countup";
 
-const data = {
-    labels: ["Rakit", "Poles Rangka", "Pasang Batu", "Poles BRJ"],
-    datasets: [
-        {
-            label: "Perajin A",
-            data: [33, 53, 85, 41, 44, 65],
-            fill: true,
-            backgroundColor: "rgba(67,194,245,1)",
-            borderColor: "rgba(75,192,192,1)"
-        },
-        {
-            label: "Perajin B",
-            data: [33, 25, 35, 51, 54, 76],
-            fill: true,
-            backgroundColor: "rgba(255,192,0,1)",
-            borderColor: "#742774",
-        },
-        {
-            label: "Perajin C",
-            data: [33, 53, 85, 41, 44, 65],
-            fill: true,
-            backgroundColor: "rgba(69,234,160,1)",
-            borderColor: "rgba(75,192,192,1)"
-        },
-    ],
-  };
-
-const data1 = {
-    labels: ["01/11/2021", "02/11/2021", "03/11/2021", "04/11/2021", "05/11/2021", "06/11/2021", "07/11/2021", "08/11/2021", "09/11/2021", "10/11/2021", "11/11/2021", "12/11/2021", "13/11/2021", "14/11/2021", "15/11/2021", "16/11/2021", "17/11/2021", "18/11/2021", "19/11/2021", "20/11/2021", "21/11/2021", "22/11/2021", "23/11/2021", "24/11/2021", "25/11/2021", "26/11/2021", "27/11/2021", "28/11/2021", "29/11/2021", "30/11/2021"],
-    datasets: [
-        {
-            label: "TARGET",
-            fill: true,
-            lineTension: 0.1,
-            backgroundColor: "rgba(30,144,255,0.2)",
-            borderColor: "rgba(75,192,192,1)",
-            borderCapStyle: "round",
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: "miter",
-            pointBorderColor: "rgba(30,144,255,0.2)",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(30,144,255,0.2)",
-            pointHoverBorderColor: "rgba(220,220,220,1)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
-            pointHitRadius: 10,
-            data: [80, 70, 90, 90, 60, 70, 60, 70, 30, 40, 70, 60, 90, 90, 60, 60, 50, 60, 30, 40, 70, 60, 90, 90, 60, 60, 50, 60, 90, 40],
-        },
-        {
-            label: "BRJ",
-            fill: true,
-            lineTension: 0.1,
-            backgroundColor: "rgba(255,140,0,0.6)",
-            borderColor: "rgba(255,255,255,1)",
-            borderCapStyle: "round",
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: "miter",
-            pointBorderColor: "rgba(255,140,0,0.6)",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(255,140,0,0.6)",
-            pointHoverBorderColor: "rgba(220,220,220,1)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
-            pointHitRadius: 10,
-            data: [65, 59, 80, 81, 56, 55, 40, 50, 20, 30, 65, 59, 80, 81, 56, 55, 40, 50, 20, 30, 65, 59, 80, 81, 56, 55, 40, 50, 80, 20],
-        },
-    ],
-}
-
-export default class RakitCluster21 extends Component {
+export default class RakitCluster10 extends Component {
     constructor() {
         super();
     
         this.state = {
-          items: [],
+          itemPerfomances: [],
+          chartDataPoin: {},
+          itemRakits: [],
+          itemPBs: [],
+          itemPolesRangkas: [],
+          itemPolesBrjs: [],
+          chartDataBRJ: {},
         };
         this.toggle = this.toggle.bind(this);
       }
@@ -119,59 +50,160 @@ export default class RakitCluster21 extends Component {
       }
 
       async getDataPerfomance(){
-        const url = 'http://localhost:8090/api/ranking-cluster-21';
-        // const urlprod = 'http://103.247.217.10:8091/api/ranking-cluster-10';
-        const res = await axios.get(url);
+        // const url = 'http://localhost:8090/api/ranking-coba1';
+        const urlprod = 'http://103.247.217.10:8091/api/ranking-cluster-25';
+        const res = await axios.get(urlprod);
         // console.log(res.data);
-        this.setState({items: res.data, DataisLoaded: true});
+        this.setState({itemPerfomances: res.data, DataisLoaded: true});
       }
 
       async getDataPoin(){
-        const url = 'http://localhost:8090/api/poin-cluster-21';
-        // const urlprod = 'http://103.247.217.10:8091/api/poin-cluster-10';
-        const res = await axios.get(url);
-        // console.log(res.data);
-        this.setState({items: res.data, DataisLoaded: true});
+        // const url = 'http://localhost:8090/api/poin-coba2';
+        const urlprod = 'http://103.247.217.10:8091/api/poin-cluster-25';
+        await axios.get(urlprod)
+        .then(res => {
+            const poins = res.data;
+            let labels = [];
+            let data = [];
+            poins.forEach(element => {
+                labels.push(element.vf_nama_tukang);
+                data.push(element.vf_actual);
+            })
+            console.log(labels[0]);
+            console.log(data);
+            this.setState({
+                chartDataPoin: {
+                    labels: ["Rakit", "Poles Rangka", "Pasang Batu", "Poles BRJ"],
+                    datasets: 
+                    [                        
+                        {
+                            label: labels,
+                            data: data,
+                            fill: true,
+                            backgroundColor: "rgba(67,194,245,1)",
+                            borderColor: "rgba(75,192,192,1)",
+                        },                 
+                        {
+                            label: labels,
+                            data: data,
+                            fill: true,
+                            backgroundColor: "rgba(255,192,0,1)",
+                            borderColor: "#742774",
+                        },                 
+                        {
+                            label: labels,
+                            data: data,
+                            fill: true,
+                            backgroundColor: "rgba(69,234,160,1)",
+                            borderColor: "rgba(75,192,192,1)",
+                        },
+                    ]
+                },
+                DataisLoaded: true
+            })
+        });
+        // console.log(this.state.chartDataPoin);
+        // this.setState({items: res.data, DataisLoaded: true});
       }
 
       async getDataRakit(){
-        const url = 'http://localhost:8090/api/data-rakit-cluster-21';
-        // const urlprod = 'http://103.247.217.10:8091/api/data-rakit-cluster-10';
-        const res = await axios.get(url);
+        // const url = 'http://localhost:8090/api/data-rakit-coba3';
+        const urlprod = 'http://103.247.217.10:8091/api/data-rakit-cluster-25';
+        const res = await axios.get(urlprod);
         // console.log(res.data);
-        this.setState({items: res.data, DataisLoaded: true});
+        this.setState({itemRakits: res.data, DataisLoaded: true});
       }
 
       async getDataPolesRangka(){
-        const url = 'http://localhost:8090/api/data-poles-rangka-cluster-21';
-        // const urlprod = 'http://103.247.217.10:8091/api/data-poles-rangka-cluster-10';
-        const res = await axios.get(url);
+        // const url = 'http://localhost:8090/api/data-poles-rangka-coba4';
+        const urlprod = 'http://103.247.217.10:8091/api/data-poles-rangka-cluster-25';
+        const res = await axios.get(urlprod);
         // console.log(res.data);
-        this.setState({items: res.data, DataisLoaded: true});
+        this.setState({itemPolesRangkas: res.data, DataisLoaded: true});
       }
 
       async getDataPasangBatu(){
-        const url = 'http://localhost:8090/api/data-pasang-batu-cluster-21';
-        // const urlprod = 'http://103.247.217.10:8091/api/data-pasang-batu-cluster-10';
-        const res = await axios.get(url);
+        // const url = 'http://localhost:8090/api/data-pasang-batu-coba5';
+        const urlprod = 'http://103.247.217.10:8091/api/data-pasang-batu-cluster-25';
+        const res = await axios.get(urlprod);
         // console.log(res.data);
-        this.setState({items: res.data, DataisLoaded: true});
+        this.setState({itemPBs: res.data, DataisLoaded: true});
       }
 
       async getDataPolesBRJ(){
-        const url = 'http://localhost:8090/api/data-poles-brj-cluster-21';
-        // const urlprod = 'http://103.247.217.10:8091/api/data-poles-brj-cluster-10';
-        const res = await axios.get(url);
+        // const url = 'http://localhost:8090/api/data-poles-brj-coba6';
+        const urlprod = 'http://103.247.217.10:8091/api/data-poles-brj-cluster-25';
+        const res = await axios.get(urlprod);
         // console.log(res.data);
-        this.setState({items: res.data, DataisLoaded: true});
+        this.setState({itemPolesBrjs: res.data, DataisLoaded: true});
       }
 
       async getBRJ(){
-        const url = 'http://localhost:8090/api/brj-cluster-21';
-        // const urlprod = 'http://103.247.217.10:8091/api/brj-cluster-10';
-        const res = await axios.get(url);
-        // console.log(res.data);
-        this.setState({items: res.data, DataisLoaded: true});
+        // const url = 'http://localhost:8090/api/brj-coba7';
+        const urlprod = 'http://103.247.217.10:8091/api/brj-cluster-25';
+        await axios.get(urlprod)
+        .then(res => {
+            const brj = res.data;
+            let dates = [];
+            let targets = [];
+            let data = [];
+            brj.forEach(element => {
+                dates.push(element.m_tanggal)
+                targets.push(element.m_target);
+                data.push(element.m_pcs);
+            })
+            // console.log(brj);
+            this.setState({
+                chartDataBRJ: {
+                    labels: dates,
+                    datasets: [
+                        {
+                            label: "TARGET",
+                            fill: true,
+                            lineTension: 0.1,
+                            backgroundColor: "rgba(30,144,255,0.2)",
+                            borderColor: "rgba(75,192,192,1)",
+                            borderCapStyle: "round",
+                            borderDash: [],
+                            borderDashOffset: 0.0,
+                            borderJoinStyle: "miter",
+                            pointBorderColor: "rgba(30,144,255,0.2)",
+                            pointBackgroundColor: "#fff",
+                            pointBorderWidth: 1,
+                            pointHoverRadius: 5,
+                            pointHoverBackgroundColor: "rgba(30,144,255,0.2)",
+                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                            pointHoverBorderWidth: 2,
+                            pointRadius: 1,
+                            pointHitRadius: 10,
+                            data: targets,
+                        },
+                        {
+                            label: "BRJ",
+                            fill: true,
+                            lineTension: 0.1,
+                            backgroundColor: "rgba(255,140,0,0.6)",
+                            borderColor: "rgba(255,255,255,1)",
+                            borderCapStyle: "round",
+                            borderDash: [],
+                            borderDashOffset: 0.0,
+                            borderJoinStyle: "miter",
+                            pointBorderColor: "rgba(255,140,0,0.6)",
+                            pointBackgroundColor: "#fff",
+                            pointBorderWidth: 1,
+                            pointHoverRadius: 5,
+                            pointHoverBackgroundColor: "rgba(255,140,0,0.6)",
+                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                            pointHoverBorderWidth: 2,
+                            pointRadius: 1,
+                            pointHitRadius: 10,
+                            data: data,
+                        }
+                    ]
+                },
+                DataisLoaded: true
+            })
+        });
       }
 
       componentDidMount(){
@@ -194,7 +226,7 @@ export default class RakitCluster21 extends Component {
             slidesToShow: 1,
             slidesToScroll: 1,
             initialSlide: 0,
-            autoplay: true,
+            autoplay: false,
             responsive: [
               {
                 breakpoint: 1024,
@@ -240,7 +272,7 @@ export default class RakitCluster21 extends Component {
                                 <div className="slider-item">                      
                                     <Row>
                                         <Col lg="12" md="12" sm="12">
-                                            <h1 className="text-center" style={{color:'black'}}>BEST PERFOMANCE CLUSTER 2.5</h1>
+                                            <h1 className="text-center" style={{color:'black'}}>BEST PERFOMANCE Cluster 2.5</h1>
                                         </Col>
                                     </Row>
                                     <Row>
@@ -249,66 +281,23 @@ export default class RakitCluster21 extends Component {
                                         </Col>
                                     </Row>
                                     <Row style={{marginTop: 100}}>
+                                        {this.state.itemPerfomances.map((itemPerfomance) => ( 
                                         <Col lg="3" md="3" sm="12">
                                             <Card className="card-shadow-secondary border bg-happy-green text-white" outline color="secondary">
                                                 <CardHeader>
-                                                    <h1 className="text-center">RAKIT</h1>
+                                                    <h1 className="text-center">{itemPerfomance.vf_proses}</h1>
                                                 </CardHeader>
                                                 <CardBody>
-                                                    <img src={'https://myapps.cmk.co.id/hrd/image/none.jpg'} alt='' style={{height:104, width:125}} />
-                                                    <h3 className="text-center">210323</h3>
-                                                    <h3 className="text-center">ASAL</h3>
+                                                    <center><img src={'https://myapps.cmk.co.id/hrd/image/'+itemPerfomance.vf_tukang+'.jpg'} alt='' style={{height:104, width:125}} /></center>
+                                                    <h4 className="text-center">{itemPerfomance.vf_tukang}</h4>
+                                                    <h4 className="text-center">{itemPerfomance.vf_nama_tukang}</h4>
                                                 </CardBody>
                                                 <CardFooter>
-                                                    <h3 className="text-center"><CountUp start={0} end={90} separator="," decimals={0} decimal="." prefix="" useEasing={false} suffix="%" duration="0"/></h3>
+                                                    <h4 className="text-center"><CountUp start={0} end={itemPerfomance.vf_performance} separator="," decimals={0} decimal="." prefix="" useEasing={false} suffix="%" duration="0"/></h4>
                                                 </CardFooter>
                                             </Card>
                                         </Col>
-                                        <Col lg="3" md="3" sm="12">                                            
-                                            <Card className="card-shadow-secondary border bg-night-fade text-white" outline color="secondary">
-                                                <CardHeader>
-                                                    <h1 className="text-center">POLES RANGKA</h1>
-                                                </CardHeader>
-                                                <CardBody>
-                                                    <img src={'https://myapps.cmk.co.id/hrd/image/none.jpg'} alt='' style={{height:104, width:125}} />
-                                                    <h3 className="text-center">210323</h3>
-                                                    <h3 className="text-center">ASAL</h3>
-                                                </CardBody>
-                                                <CardFooter>
-                                                    <h3 className="text-center"><CountUp start={0} end={60} separator="," decimals={0} decimal="." prefix="" useEasing={false} suffix="%" duration="0"/></h3>
-                                                </CardFooter>
-                                            </Card>
-                                        </Col>
-                                        <Col lg="3" md="3" sm="12">                                          
-                                            <Card className="card-shadow-secondary border bg-arielle-smile text-white" outline color="secondary">
-                                                <CardHeader>
-                                                    <h1 className="text-center">PASANG BATU</h1>
-                                                </CardHeader>
-                                                <CardBody>
-                                                    <img src={'https://myapps.cmk.co.id/hrd/image/none.jpg'} alt='' style={{height:104, width:125}} />
-                                                    <h3 className="text-center">210323</h3>
-                                                    <h3 className="text-center">ASAL</h3>
-                                                </CardBody>
-                                                <CardFooter>
-                                                    <h3 className="text-center"><CountUp start={0} end={30} separator="," decimals={0} decimal="." prefix="" useEasing={false} suffix="%" duration="0"/></h3>
-                                                </CardFooter>
-                                            </Card>                                            
-                                        </Col>
-                                        <Col lg="3" md="3" sm="12">                                          
-                                            <Card className="card-shadow-secondary border bg-happy-green text-white" outline color="secondary">
-                                                <CardHeader>
-                                                    <h1 className="text-center">POLES BRJ</h1>
-                                                </CardHeader>
-                                                <CardBody>
-                                                    <img src={'https://myapps.cmk.co.id/hrd/image/none.jpg'} alt='' style={{height:104, width:125}} />
-                                                    <h3 className="text-center">210323</h3>
-                                                    <h3 className="text-center">ASAL</h3>
-                                                </CardBody>
-                                                <CardFooter>
-                                                    <h3 className="text-center"><CountUp start={0} end={10} separator="," decimals={0} decimal="." prefix="" useEasing={false} suffix="%" duration="0"/></h3>
-                                                </CardFooter>
-                                            </Card>                                            
-                                        </Col>
+                                        ))}
                                     </Row>
                                 </div> 
                                 <div className="slider-item">                      
@@ -323,8 +312,8 @@ export default class RakitCluster21 extends Component {
                                     </Row>
                                     <Row>
                                         <Col lg="12">
-                                            <Card className="mt-3">
-                                                <HorizontalBar data={data} width={1400} height={540} options={
+                                            {/* <Card className="mt-3"> */}
+                                                <HorizontalBar data={this.state.chartDataPoin} width={1400} height={540} options={
                                                     {
                                                         maintainAspectRatio: true, 
                                                         scales: {
@@ -344,7 +333,7 @@ export default class RakitCluster21 extends Component {
                                                         }
                                                     }
                                                 }/>
-                                            </Card>
+                                            {/* </Card> */}
                                         </Col>                                        
                                     </Row>
                                 </div> 
@@ -361,8 +350,8 @@ export default class RakitCluster21 extends Component {
                                     </Row>
                                     <Row>
                                         <Col lg="12" md="12" sm="12">
-                                            <Card className="mt-3">
-                                                <CardBody>       
+                                            {/* <Card className="mt-3"> */}
+                                                {/* <CardBody>        */}
                                                 <Table responsive className="mb-0">
                                                     <thead>
                                                         <tr>
@@ -399,31 +388,19 @@ export default class RakitCluster21 extends Component {
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        {this.state.itemRakits.map((itemRakit) => (
                                                         <tr>
-                                                            <th scope="row">2.5</th>
-                                                            <td>Rakit</td>
-                                                            <td>Perajin A</td>
-                                                            <td>22.5</td>
-                                                            <td>23%</td>
+                                                            <th scope="row">{itemRakit.vf_cluster}</th>
+                                                            <td>{itemRakit.vf_proses}</td>
+                                                            <td>{itemRakit.vf_nama_tukang}</td>
+                                                            <td>{itemRakit.vf_actual}</td>
+                                                            <td><CountUp start={0} end={itemRakit.vf_performance} separator="," decimals={1} decimal="." prefix="" useEasing={false} suffix="%" duration="0"/></td>
                                                         </tr>
-                                                        <tr>
-                                                            <th scope="row">2.5</th>
-                                                            <td>Rakit</td>
-                                                            <td>Perajin A</td>
-                                                            <td>22.5</td>
-                                                            <td>23%</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">2.5</th>
-                                                            <td>Rakit</td>
-                                                            <td>Perajin A</td>
-                                                            <td>22.5</td>
-                                                            <td>23%</td>
-                                                        </tr>
+                                                        ))}
                                                     </tbody>
                                                 </Table>
-                                                </CardBody>
-                                            </Card>
+                                                {/* </CardBody> */}
+                                            {/* </Card> */}
                                         </Col>
                                     </Row>
                                 </div>
@@ -438,70 +415,54 @@ export default class RakitCluster21 extends Component {
                                         </Col>
                                     </Row>
                                     <Row>
-                                        <Col lg="12" md="12" sm="12">
-                                            <Card className="mt-3">
-                                                <CardBody>                                                    
-                                                    <Table responsive className="mb-0">
-                                                        <thead>
+                                        <Col lg="12" md="12" sm="12">                                                  
+                                            <Table responsive className="mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th style={{
+                                                        border: '1px solid white',
+                                                        background: 'rgb(250,105,105)',
+                                                        color: 'white',
+                                                        fontWeight: 'bold',
+                                                        }}>Cluster</th>
+                                                        <th style={{
+                                                        border: '1px solid white',
+                                                        background: 'rgb(250,105,105)',
+                                                        color: 'white',
+                                                        fontWeight: 'bold',
+                                                        }}>Proses</th>
+                                                        <th style={{
+                                                        border: '1px solid white',
+                                                        background: 'rgb(250,105,105)',
+                                                        color: 'white',
+                                                        fontWeight: 'bold',
+                                                        }}>Nama</th>
+                                                        <th style={{
+                                                        border: '1px solid white',
+                                                        background: 'rgb(250,105,105)',
+                                                        color: 'white',
+                                                        fontWeight: 'bold',
+                                                        }}>Total Poin</th>
+                                                        <th style={{
+                                                        border: '1px solid white',
+                                                        background: 'rgb(250,105,105)',
+                                                        color: 'white',
+                                                        fontWeight: 'bold',
+                                                        }}>Pencapaian</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {this.state.itemPolesRangkas.map((itemPolesRangka) => (
                                                         <tr>
-                                                                <th style={{
-                                                                border: '1px solid white',
-                                                                background: 'rgb(250,105,105)',
-                                                                color: 'white',
-                                                                fontWeight: 'bold',
-                                                                }}>Cluster</th>
-                                                                <th style={{
-                                                                border: '1px solid white',
-                                                                background: 'rgb(250,105,105)',
-                                                                color: 'white',
-                                                                fontWeight: 'bold',
-                                                                }}>Proses</th>
-                                                                <th style={{
-                                                                border: '1px solid white',
-                                                                background: 'rgb(250,105,105)',
-                                                                color: 'white',
-                                                                fontWeight: 'bold',
-                                                                }}>Nama</th>
-                                                                <th style={{
-                                                                border: '1px solid white',
-                                                                background: 'rgb(250,105,105)',
-                                                                color: 'white',
-                                                                fontWeight: 'bold',
-                                                                }}>Total Poin</th>
-                                                                <th style={{
-                                                                border: '1px solid white',
-                                                                background: 'rgb(250,105,105)',
-                                                                color: 'white',
-                                                                fontWeight: 'bold',
-                                                                }}>Pencapaian</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <th scope="row">2.5</th>
-                                                                <td>Poles Rangka</td>
-                                                                <td>Perajin A</td>
-                                                                <td>22.5</td>
-                                                                <td>23%</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">2.5</th>
-                                                                <td>Poles Rangka</td>
-                                                                <td>Perajin A</td>
-                                                                <td>22.5</td>
-                                                                <td>23%</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">2.5</th>
-                                                                <td>Poles Rangka</td>
-                                                                <td>Perajin A</td>
-                                                                <td>22.5</td>
-                                                                <td>23%</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </Table>
-                                                </CardBody>
-                                            </Card>
+                                                            <th scope="row">{itemPolesRangka.vf_cluster}</th>
+                                                            <td>{itemPolesRangka.vf_proses}</td>
+                                                            <td>{itemPolesRangka.vf_nama_tukang}</td>
+                                                            <td>{itemPolesRangka.vf_actual}</td>
+                                                            <td><CountUp start={0} end={itemPolesRangka.vf_performance} separator="," decimals={1} decimal="." prefix="" useEasing={false} suffix="%" duration="0"/></td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </Table>
                                         </Col>
                                     </Row>
                                 </div>
@@ -516,70 +477,54 @@ export default class RakitCluster21 extends Component {
                                         </Col>
                                     </Row>
                                     <Row>
-                                        <Col lg="12" md="12" sm="12">
-                                            <Card className="mt-3">
-                                                <CardBody>                                                    
-                                                    <Table responsive className="mb-0">
-                                                        <thead>
-                                                        <tr>
-                                                            <th style={{
-                                                            border: '1px solid white',
-                                                            background: 'rgb(246,195,12)',
-                                                            color: 'white',
-                                                            fontWeight: 'bold',
-                                                            }}>Cluster</th>
-                                                            <th style={{
-                                                            border: '1px solid white',
-                                                            background: 'rgb(246,195,12)',
-                                                            color: 'white',
-                                                            fontWeight: 'bold',
-                                                            }}>Proses</th>
-                                                            <th style={{
-                                                            border: '1px solid white',
-                                                            background: 'rgb(246,195,12)',
-                                                            color: 'white',
-                                                            fontWeight: 'bold',
-                                                            }}>Nama</th>
-                                                            <th style={{
-                                                            border: '1px solid white',
-                                                            background: 'rgb(246,195,12)',
-                                                            color: 'white',
-                                                            fontWeight: 'bold',
-                                                            }}>Total Poin</th>
-                                                            <th style={{
-                                                            border: '1px solid white',
-                                                            background: 'rgb(246,195,12)',
-                                                            color: 'white',
-                                                            fontWeight: 'bold',
-                                                            }}>Pencapaian</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <th scope="row">2.5</th>
-                                                                <td>Pasang Batu</td>
-                                                                <td>Perajin A</td>
-                                                                <td>22.5</td>
-                                                                <td>23%</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">2.5</th>
-                                                                <td>Pasang Batu</td>
-                                                                <td>Perajin A</td>
-                                                                <td>22.5</td>
-                                                                <td>23%</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">2.5</th>
-                                                                <td>Pasang Batu</td>
-                                                                <td>Perajin A</td>
-                                                                <td>22.5</td>
-                                                                <td>23%</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </Table>
-                                                </CardBody>
-                                            </Card>
+                                        <Col lg="12" md="12" sm="12"> 
+                                            <Table responsive className="mb-0">
+                                                <thead>
+                                                <tr>
+                                                    <th style={{
+                                                    border: '1px solid white',
+                                                    background: 'rgb(246,195,12)',
+                                                    color: 'white',
+                                                    fontWeight: 'bold',
+                                                    }}>Cluster</th>
+                                                    <th style={{
+                                                    border: '1px solid white',
+                                                    background: 'rgb(246,195,12)',
+                                                    color: 'white',
+                                                    fontWeight: 'bold',
+                                                    }}>Proses</th>
+                                                    <th style={{
+                                                    border: '1px solid white',
+                                                    background: 'rgb(246,195,12)',
+                                                    color: 'white',
+                                                    fontWeight: 'bold',
+                                                    }}>Nama</th>
+                                                    <th style={{
+                                                    border: '1px solid white',
+                                                    background: 'rgb(246,195,12)',
+                                                    color: 'white',
+                                                    fontWeight: 'bold',
+                                                    }}>Total Poin</th>
+                                                    <th style={{
+                                                    border: '1px solid white',
+                                                    background: 'rgb(246,195,12)',
+                                                    color: 'white',
+                                                    fontWeight: 'bold',
+                                                    }}>Pencapaian</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {this.state.itemPBs.map((itemPB) => (
+                                                    <tr>
+                                                        <th scope="row">{itemPB.vf_cluster}</th>
+                                                        <td>{itemPB.vf_proses}</td>
+                                                        <td>{itemPB.vf_nama_tukang}</td>
+                                                        <td>{itemPB.vf_actual}</td>
+                                                        <td><CountUp start={0} end={itemPB.vf_performance} separator="," decimals={1} decimal="." prefix="" useEasing={false} suffix="%" duration="0"/></td>
+                                                    </tr>
+                                                    ))}
+                                                </tbody>
+                                            </Table>
                                         </Col>
                                     </Row>
                                 </div>
@@ -595,69 +540,53 @@ export default class RakitCluster21 extends Component {
                                     </Row>
                                     <Row>
                                         <Col lg="12" md="12" sm="12">
-                                            <Card className="mt-3">
-                                                <CardBody>                                                    
-                                                    <Table responsive className="mb-0">
-                                                        <thead>
-                                                        <tr>
-                                                                <th style={{
-                                                                border: '1px solid white',
-                                                                background: 'rgb(69,234,160)',
-                                                                color: 'white',
-                                                                fontWeight: 'bold',
-                                                                }}>Cluster</th>
-                                                                <th style={{
-                                                                border: '1px solid white',
-                                                                background: 'rgb(69,234,160)',
-                                                                color: 'white',
-                                                                fontWeight: 'bold',
-                                                                }}>Proses</th>
-                                                                <th style={{
-                                                                border: '1px solid white',
-                                                                background: 'rgb(69,234,160)',
-                                                                color: 'white',
-                                                                fontWeight: 'bold',
-                                                                }}>Nama</th>
-                                                                <th style={{
-                                                                border: '1px solid white',
-                                                                background: 'rgb(69,234,160)',
-                                                                color: 'white',
-                                                                fontWeight: 'bold',
-                                                                }}>Total Poin</th>
-                                                                <th style={{
-                                                                border: '1px solid white',
-                                                                background: 'rgb(69,234,160)',
-                                                                color: 'white',
-                                                                fontWeight: 'bold',
-                                                                }}>Pencapaian</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <th scope="row">2.5</th>
-                                                                <td>Poles BRJ</td>
-                                                                <td>Perajin A</td>
-                                                                <td>22.5</td>
-                                                                <td>23%</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">2.5</th>
-                                                                <td>Poles BRJ</td>
-                                                                <td>Perajin A</td>
-                                                                <td>22.5</td>
-                                                                <td>23%</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">2.5</th>
-                                                                <td>Poles BRJ</td>
-                                                                <td>Perajin A</td>
-                                                                <td>22.5</td>
-                                                                <td>23%</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </Table>
-                                                </CardBody>
-                                            </Card>
+                                            <Table responsive className="mb-0">
+                                                <thead>
+                                                <tr>
+                                                        <th style={{
+                                                        border: '1px solid white',
+                                                        background: 'rgb(69,234,160)',
+                                                        color: 'white',
+                                                        fontWeight: 'bold',
+                                                        }}>Cluster</th>
+                                                        <th style={{
+                                                        border: '1px solid white',
+                                                        background: 'rgb(69,234,160)',
+                                                        color: 'white',
+                                                        fontWeight: 'bold',
+                                                        }}>Proses</th>
+                                                        <th style={{
+                                                        border: '1px solid white',
+                                                        background: 'rgb(69,234,160)',
+                                                        color: 'white',
+                                                        fontWeight: 'bold',
+                                                        }}>Nama</th>
+                                                        <th style={{
+                                                        border: '1px solid white',
+                                                        background: 'rgb(69,234,160)',
+                                                        color: 'white',
+                                                        fontWeight: 'bold',
+                                                        }}>Total Poin</th>
+                                                        <th style={{
+                                                        border: '1px solid white',
+                                                        background: 'rgb(69,234,160)',
+                                                        color: 'white',
+                                                        fontWeight: 'bold',
+                                                        }}>Pencapaian</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {this.state.itemPolesBrjs.map((itemPolesBrj) => (
+                                                    <tr>
+                                                        <th scope="row">{itemPolesBrj.vf_cluster}</th>
+                                                        <td>{itemPolesBrj.vf_proses}</td>
+                                                        <td>{itemPolesBrj.vf_nama_tukang}</td>
+                                                        <td>{itemPolesBrj.vf_actual}</td>
+                                                        <td><CountUp start={0} end={itemPolesBrj.vf_performance} separator="," decimals={1} decimal="." prefix="" useEasing={false} suffix="%" duration="0"/></td>
+                                                    </tr>
+                                                    ))}
+                                                </tbody>
+                                            </Table>
                                         </Col>
                                     </Row>
                                 </div>
@@ -674,8 +603,8 @@ export default class RakitCluster21 extends Component {
                                     </Row>
                                     <Row>
                                         <Col lg="12">
-                                            <Card className="mt-3">
-                                                <Line data={data1} width={1400} height={500} options={
+                                            {/* <Card className="mt-3"> */}
+                                                <Line data={this.state.chartDataBRJ} width={1400} height={500} options={
                                                     {
                                                         maintainAspectRatio: true, 
                                                         scales: {
@@ -695,7 +624,7 @@ export default class RakitCluster21 extends Component {
                                                         }
                                                     }
                                                 }/>                                                
-                                            </Card>
+                                            {/* </Card> */}
                                         </Col>   
                                     </Row>
                                 </div>
