@@ -69,8 +69,8 @@ export default class RakitCluster10 extends Component {
                 labels.push(element.vf_nama_tukang);
                 data.push(element.vf_actual);
             })
-            console.log(labels[0]);
-            console.log(data);
+            // console.log(labels[0]);
+            // console.log(data);
             this.setState({
                 chartDataPoin: {
                     labels: ["Rakit", "Poles Rangka", "Pasang Batu", "Poles BRJ"],
@@ -283,12 +283,12 @@ export default class RakitCluster10 extends Component {
                                     <Row style={{marginTop: 100}}>
                                         {this.state.itemPerfomances.map((itemPerfomance) => ( 
                                         <Col lg="3" md="3" sm="12">
-                                            <Card className="card-shadow-secondary border bg-happy-green text-white" outline color="secondary">
+                                            <Card className={itemPerfomance.vf_proses == "RAKIT_REP" ? "card-shadow-secondary border bg-happy-green text-white" : itemPerfomance.vf_proses == "PB" ? "card-shadow-secondary border bg-arielle-smile text-white" : itemPerfomance.vf_proses == "POLESRK" ? "card-shadow-secondary border bg-sunny-morning text-white" : "card-shadow-secondary border bg-mixed-hopes text-white"} outline color="secondary">
                                                 <CardHeader>
-                                                    <h1 className="text-center">{itemPerfomance.vf_proses}</h1>
+                                                    <h1 className="text-center">{itemPerfomance.vf_proses == "RAKIT_REP" ? "RAKIT REPARASI" : itemPerfomance.vf_proses == "PB" ? "PASANG BATU" : itemPerfomance.vf_proses == "POLESRK" ? "POLES RANGKA" : "POLES BRJ"}</h1>
                                                 </CardHeader>
                                                 <CardBody>
-                                                    <center><img src={'https://myapps.cmk.co.id/hrd/image/'+itemPerfomance.vf_tukang+'.jpg'} alt='' style={{height:104, width:125}} /></center>
+                                                    <center><img src={itemPerfomance.vf_foto == null ? 'https://myapps.cmk.co.id/hrd/image/'+itemPerfomance.vf_tukang+'.jpg' : itemPerfomance.vf_foto == "" ? 'https://myapps.cmk.co.id/hrd/image/'+itemPerfomance.vf_tukang+'.jpg' : 'https://myapps.cmk.co.id/hrd/image/'+itemPerfomance.vf_foto} alt={itemPerfomance.vf_foto == "" ? itemPerfomance.vf_tukang : itemPerfomance.vf_foto == null ? itemPerfomance.vf_tukang : itemPerfomance.vf_foto} style={{height:104, width:125}} /></center>
                                                     <h4 className="text-center">{itemPerfomance.vf_tukang}</h4>
                                                     <h4 className="text-center">{itemPerfomance.vf_nama_tukang}</h4>
                                                 </CardBody>

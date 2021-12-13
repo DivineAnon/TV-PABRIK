@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 
 // DASHBOARDS
 // import DOBRJDashboard from "./DOBRJ";
-// import PerfomanceDashboard from "./Perfomance";
+import PerfomanceDashboard from "./Perfomance";
 import RakitCluster10  from "./RakitCluster1.0";
 import RakitCluster21  from "./RakitCluster2.1";
 import RakitCluster22  from "./RakitCluster2.2";
@@ -46,7 +46,7 @@ const Dashboards = ({ match }) => (
     <div className="app-main">
       {/* <AppSidebar /> */}
       <div className="app-main__outer">
-      {/* <Route path={`${match.url}/perfomance`} component={PerfomanceDashboard}/> */}
+      <Route path={`${match.url}/perfomance`} component={PerfomanceDashboard}/>
       {/* <Route path={`${match.url}/dobrj`} component={DOBRJDashboard}/> */}
       <Route path={`${match.url}/cluster-10`} component={RakitCluster10}/>
       <Route path={`${match.url}/cluster-21`} component={RakitCluster21}/>

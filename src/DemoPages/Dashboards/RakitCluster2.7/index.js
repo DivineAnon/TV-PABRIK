@@ -69,8 +69,8 @@ export default class RakitCluster10 extends Component {
                 labels.push(element.vf_nama_tukang);
                 data.push(element.vf_actual);
             })
-            console.log(labels[0]);
-            console.log(data);
+            // console.log(labels[0]);
+            // console.log(data);
             this.setState({
                 chartDataPoin: {
                     labels: ["Rakit", "Poles Rangka", "Pasang Batu", "Poles BRJ"],
@@ -288,7 +288,7 @@ export default class RakitCluster10 extends Component {
                                                     <h1 className="text-center">{itemPerfomance.vf_proses}</h1>
                                                 </CardHeader>
                                                 <CardBody>
-                                                    <center><img src={'https://myapps.cmk.co.id/hrd/image/'+itemPerfomance.vf_tukang+'.jpg'} alt='' style={{height:104, width:125}} /></center>
+                                                    <center><img src={itemPerfomance.vf_foto == null ? 'https://myapps.cmk.co.id/hrd/image/'+itemPerfomance.vf_tukang+'.jpg' : itemPerfomance.vf_foto == "" ? 'https://myapps.cmk.co.id/hrd/image/'+itemPerfomance.vf_tukang+'.jpg' : 'https://myapps.cmk.co.id/hrd/image/'+itemPerfomance.vf_foto} alt='' style={{height:104, width:125}} /></center>
                                                     <h4 className="text-center">{itemPerfomance.vf_tukang}</h4>
                                                     <h4 className="text-center">{itemPerfomance.vf_nama_tukang}</h4>
                                                 </CardBody>
