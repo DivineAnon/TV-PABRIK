@@ -226,7 +226,7 @@ export default class RakitCluster10 extends Component {
             slidesToShow: 1,
             slidesToScroll: 1,
             initialSlide: 0,
-            autoplay: false,
+            autoplay: true,
             responsive: [
               {
                 breakpoint: 1024,
