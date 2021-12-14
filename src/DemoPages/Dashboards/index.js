@@ -46,7 +46,7 @@ const Dashboards = ({ match }) => (
     <div className="app-main">
       {/* <AppSidebar /> */}
       <div className="app-main__outer">
-      <Route path={`${match.url}/perfomance`} component={PerfomanceDashboard}/>
+      {/* <Route path={`${match.url}/perfomance`} component={PerfomanceDashboard}/> */}
       {/* <Route path={`${match.url}/dobrj`} component={DOBRJDashboard}/> */}
       <Route path={`${match.url}/cluster-10`} component={RakitCluster10}/>
       <Route path={`${match.url}/cluster-21`} component={RakitCluster21}/>
