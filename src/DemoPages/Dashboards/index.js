@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 
 // DASHBOARDS
 // import DOBRJDashboard from "./DOBRJ";
-import PerfomanceDashboard from "./Perfomance";
+// import PerfomanceDashboard from "./Perfomance";
 import RakitCluster10  from "./RakitCluster1.0";
 import RakitCluster21  from "./RakitCluster2.1";
 import RakitCluster22  from "./RakitCluster2.2";

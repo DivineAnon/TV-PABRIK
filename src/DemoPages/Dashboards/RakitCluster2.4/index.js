@@ -25,6 +25,10 @@ export default class RakitCluster24 extends Component {
         this.state = {
           itemPerfomances: [],
           chartDataPoin: {},
+          chartDataPoinRakit: {},
+          chartDataPoinPolesRangka: {},
+          chartDataPoinPB: {},
+          chartDataPoinPolesBRJ: {},
           itemRakits: [],
           itemPBs: [],
           itemPolesRangkas: [],
@@ -96,6 +100,194 @@ export default class RakitCluster24 extends Component {
                             backgroundColor: "rgba(69,234,160,1)",
                             borderColor: "rgba(75,192,192,1)",
                         },
+                    ]
+                },
+                DataisLoaded: true
+            })
+        });
+        // console.log(this.state.chartDataPoin);
+        // this.setState({items: res.data, DataisLoaded: true});
+      }
+
+      async getDataPoinRakit(){
+        // const url = 'http://localhost:8090/api/poin-coba2';
+        const urlprod = 'http://103.247.217.10:8091/api/poin-rakit-cluster-24';
+        await axios.get(urlprod)
+        .then(res => {
+            const poins = res.data;
+            let labels = [];
+            let data = [];
+            poins.forEach(element => {
+                labels.push(element.vf_nama_tukang);
+                data.push(element.vf_actual);
+            })
+            // console.log(labels[0]);
+            // console.log(data);
+            this.setState({
+                chartDataPoinRakit: {
+                    labels: labels,
+                    datasets: 
+                    [                        
+                        {
+                            label: labels,
+                            data: data,
+                            fill: true,
+                            backgroundColor: [
+                                "rgba(67,194,245,1)",
+                                "rgba(255,192,0,1)",
+                                "rgba(69,234,160,1)",
+                                "rgba(255, 99, 132, 1)",
+                                "rgba(153, 102, 255, 1)",
+                            ],
+                            borderColor: [
+                                "rgba(75,192,192,1)",
+                                "rgba(255,192,0,1)",
+                                "rgba(75,192,192,1)",
+                                "rgba(255, 99, 132, 1)",
+                                "rgba(153, 102, 255, 1)",
+                            ],
+                        },          
+                    ]
+                },
+                DataisLoaded: true
+            })
+        });
+        // console.log(this.state.chartDataPoin);
+        // this.setState({items: res.data, DataisLoaded: true});
+      }
+      
+      async getDataPoinPolesRangka(){
+        // const url = 'http://localhost:8090/api/poin-coba2';
+        const urlprod = 'http://103.247.217.10:8091/api/poin-poles-rangka-cluster-24';
+        await axios.get(urlprod)
+        .then(res => {
+            const poins = res.data;
+            let labels = [];
+            let data = [];
+            poins.forEach(element => {
+                labels.push(element.vf_nama_tukang);
+                data.push(element.vf_actual);
+            })
+            // console.log(labels[0]);
+            // console.log(data);
+            this.setState({
+                chartDataPoinPolesRangka: {
+                    labels: labels,
+                    datasets: 
+                    [                        
+                        {
+                            label: labels,
+                            data: data,
+                            fill: true,
+                            backgroundColor: [
+                                "rgba(67,194,245,1)",
+                                "rgba(255,192,0,1)",
+                                "rgba(69,234,160,1)",
+                                "rgba(255, 99, 132, 1)",
+                                "rgba(153, 102, 255, 1)",
+                            ],
+                            borderColor: [
+                                "rgba(75,192,192,1)",
+                                "rgba(255,192,0,1)",
+                                "rgba(75,192,192,1)",
+                                "rgba(255, 99, 132, 1)",
+                                "rgba(153, 102, 255, 1)",
+                            ],
+                        },          
+                    ]
+                },
+                DataisLoaded: true
+            })
+        });
+        // console.log(this.state.chartDataPoin);
+        // this.setState({items: res.data, DataisLoaded: true});
+      }
+      
+      async getDataPoinPB(){
+        // const url = 'http://localhost:8090/api/poin-coba2';
+        const urlprod = 'http://103.247.217.10:8091/api/poin-pasang-batu-cluster-24';
+        await axios.get(urlprod)
+        .then(res => {
+            const poins = res.data;
+            let labels = [];
+            let data = [];
+            poins.forEach(element => {
+                labels.push(element.vf_nama_tukang);
+                data.push(element.vf_actual);
+            })
+            // console.log(labels[0]);
+            // console.log(data);
+            this.setState({
+                chartDataPoinPB: {
+                    labels: labels,
+                    datasets: 
+                    [                        
+                        {
+                            label: labels,
+                            data: data,
+                            fill: true,
+                            backgroundColor: [
+                                "rgba(67,194,245,1)",
+                                "rgba(255,192,0,1)",
+                                "rgba(69,234,160,1)",
+                                "rgba(255, 99, 132, 1)",
+                                "rgba(153, 102, 255, 1)",
+                            ],
+                            borderColor: [
+                                "rgba(75,192,192,1)",
+                                "rgba(255,192,0,1)",
+                                "rgba(75,192,192,1)",
+                                "rgba(255, 99, 132, 1)",
+                                "rgba(153, 102, 255, 1)",
+                            ],
+                        },          
+                    ]
+                },
+                DataisLoaded: true
+            })
+        });
+        // console.log(this.state.chartDataPoin);
+        // this.setState({items: res.data, DataisLoaded: true});
+      }
+      
+      async getDataPoinPolesBRJ(){
+        // const url = 'http://localhost:8090/api/poin-coba2';
+        const urlprod = 'http://103.247.217.10:8091/api/poin-poles-brj-cluster-24';
+        await axios.get(urlprod)
+        .then(res => {
+            const poins = res.data;
+            let labels = [];
+            let data = [];
+            poins.forEach(element => {
+                labels.push(element.vf_nama_tukang);
+                data.push(element.vf_actual);
+            })
+            // console.log(labels[0]);
+            // console.log(data);
+            this.setState({
+                chartDataPoinPolesBRJ: {
+                    labels: labels,
+                    datasets: 
+                    [                        
+                        {
+                            label: labels,
+                            data: data,
+                            fill: true,
+                            backgroundColor: [
+                                "rgba(67,194,245,1)",
+                                "rgba(255,192,0,1)",
+                                "rgba(69,234,160,1)",
+                                "rgba(255, 99, 132, 1)",
+                                "rgba(153, 102, 255, 1)",
+                            ],
+                            borderColor: [
+                                "rgba(75,192,192,1)",
+                                "rgba(255,192,0,1)",
+                                "rgba(75,192,192,1)",
+                                "rgba(255, 99, 132, 1)",
+                                "rgba(153, 102, 255, 1)",
+                            ],
+                        },          
                     ]
                 },
                 DataisLoaded: true
@@ -208,7 +400,10 @@ export default class RakitCluster24 extends Component {
       componentDidMount(){
         this.getDataPerfomance();
         this.getBRJ();
-        this.getDataPoin();
+        this.getDataPoinRakit();
+        this.getDataPoinPolesRangka();
+        this.getDataPoinPB();
+        this.getDataPoinPolesBRJ();
         this.getDataPasangBatu();
         this.getDataPolesBRJ();
         this.getDataPolesRangka();
@@ -224,8 +419,10 @@ export default class RakitCluster24 extends Component {
             autoplaySpeed: 10000,
             slidesToShow: 1,
             slidesToScroll: 1,
+            swipeToSlide: true,
             initialSlide: 0,
             autoplay: true,
+            arrows: true, 
             responsive: [
               {
                 breakpoint: 1024,
@@ -271,7 +468,7 @@ export default class RakitCluster24 extends Component {
                                 <div className="slider-item">                      
                                     <Row>
                                         <Col lg="12" md="12" sm="12">
-                                            <h1 className="text-center" style={{color:'white'}}>BEST PERFOMANCE Cluster 2.4</h1>
+                                            <h1 className="text-center" style={{color:'white'}}>BEST PERFOMANCE CLUSTER 2.4</h1>
                                         </Col>
                                     </Row>
                                     <Row>
@@ -282,12 +479,12 @@ export default class RakitCluster24 extends Component {
                                     <Row style={{marginTop: 100}}>
                                         {this.state.itemPerfomances.map((itemPerfomance) => ( 
                                         <Col lg="3" md="3" sm="12">
-                                            <Card className={itemPerfomance.vf_proses == "RAKIT_REP" ? "card-shadow-secondary border bg-happy-green text-white" : itemPerfomance.vf_proses == "PB" ? "card-shadow-secondary border bg-arielle-smile text-white" : itemPerfomance.vf_proses == "POLESRK" ? "card-shadow-secondary border bg-sunny-morning text-white" : "card-shadow-secondary border bg-mixed-hopes text-white"} outline color="secondary">
+                                            <Card className={itemPerfomance.vf_proses === "RAKIT_REP" ? "card-shadow-secondary border bg-happy-green text-white" : itemPerfomance.vf_proses === "PB" ? "card-shadow-secondary border bg-arielle-smile text-white" : itemPerfomance.vf_proses === "POLESRK" ? "card-shadow-secondary border bg-sunny-morning text-white" : "card-shadow-secondary border bg-mixed-hopes text-white"} outline color="secondary">
                                                 <CardHeader>
-                                                    <h1 className="text-center" style={{marginLeft: itemPerfomance.vf_proses == "PB" ? 20 : itemPerfomance.vf_proses == "POLESBRJ" ? 50 : 0}}>{itemPerfomance.vf_proses == "RAKIT_REP" ? "RAKIT REPARASI" : itemPerfomance.vf_proses == "PB" ? "PASANG BATU" : itemPerfomance.vf_proses == "POLESRK" ? "POLES RANGKA" : "POLES BRJ"}</h1>
+                                                    <h1 className="text-center" style={{marginLeft: itemPerfomance.vf_proses === "PB" ? 20 : itemPerfomance.vf_proses === "POLESBRJ" ? 50 : 0}}>{itemPerfomance.vf_proses === "RAKIT_REP" ? "RAKIT REPARASI" : itemPerfomance.vf_proses === "PB" ? "PASANG BATU" : itemPerfomance.vf_proses === "POLESRK" ? "POLES RANGKA" : "POLES BRJ"}</h1>
                                                 </CardHeader>
                                                 <CardBody>
-                                                    <center><img src={itemPerfomance.vf_foto == null ? 'https://myapps.cmk.co.id/hrd/image/'+itemPerfomance.vf_tukang+'.jpg' : itemPerfomance.vf_foto == "" ? 'https://myapps.cmk.co.id/hrd/image/'+itemPerfomance.vf_tukang+'.jpg' : 'https://myapps.cmk.co.id/hrd/image/'+itemPerfomance.vf_foto} alt={itemPerfomance.vf_foto == "" ? itemPerfomance.vf_tukang : itemPerfomance.vf_foto == null ? itemPerfomance.vf_tukang : itemPerfomance.vf_foto} style={{height:104, width:125}} /></center>
+                                                    <center><img src={itemPerfomance.vf_foto === null ? 'https://myapps.cmk.co.id/hrd/image/'+itemPerfomance.vf_tukang+'.jpg' : itemPerfomance.vf_foto === "" ? 'https://myapps.cmk.co.id/hrd/image/'+itemPerfomance.vf_tukang+'.jpg' : 'https://myapps.cmk.co.id/hrd/image/'+itemPerfomance.vf_foto} alt={itemPerfomance.vf_foto === "" ? itemPerfomance.vf_tukang : itemPerfomance.vf_foto == null ? itemPerfomance.vf_tukang : itemPerfomance.vf_foto} style={{height:104, width:125}} /></center>
                                                     <h4 className="text-center">{itemPerfomance.vf_tukang}</h4>
                                                     <h4 className="text-center">{itemPerfomance.vf_nama_tukang}</h4>
                                                 </CardBody>
@@ -302,7 +499,7 @@ export default class RakitCluster24 extends Component {
                                 <div className="slider-item">                      
                                     <Row>
                                         <Col lg="12" md="12" sm="12">
-                                            <h1 className="text-center" style={{color:'white'}}>Poin Harian</h1>
+                                            <h1 className="text-center" style={{color:'white'}}>Poin Harian Rakit</h1>
                                         </Col>
                                     </Row>
                                     <Row>
@@ -311,7 +508,7 @@ export default class RakitCluster24 extends Component {
                                     </Row>
                                     <Row>
                                         <Col lg="12">
-                                                <HorizontalBar data={this.state.chartDataPoin} width={1400} height={540} options={
+                                                <HorizontalBar data={this.state.chartDataPoinRakit} width={1400} height={540} options={
                                                     {
                                                         responsive: true,
                                                         maintainAspectRatio: true, 
@@ -334,6 +531,154 @@ export default class RakitCluster24 extends Component {
                                                             }],
                                                         },
                                                         legend: {
+                                                            display: false,
+                                                            labels: {
+                                                                fontColor: 'white',
+                                                            },
+                                                            position: 'right',
+                                                        },
+                                                        title:{
+                                                            fontColor: 'white',
+                                                        }
+                                                    }
+                                                }/>
+                                        </Col>                                        
+                                    </Row>
+                                </div> 
+                                <div className="slider-item">                      
+                                    <Row>
+                                        <Col lg="12" md="12" sm="12">
+                                            <h1 className="text-center" style={{color:'white'}}>Poin Harian Poles Rangka</h1>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col lg="12" md="12" sm="12">
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col lg="12">
+                                                <HorizontalBar data={this.state.chartDataPoinPolesRangka} width={1400} height={540} options={
+                                                    {
+                                                        responsive: true,
+                                                        maintainAspectRatio: true, 
+                                                        scales: {
+                                                            yAxes: [{
+                                                                gridLines: {
+                                                                    display: false
+                                                                },
+                                                                ticks: {
+                                                                    fontColor: 'white'
+                                                                }
+                                                            }],
+                                                            xAxes: [{
+                                                                gridLines: {
+                                                                    display: false
+                                                                },
+                                                                ticks: {
+                                                                    fontColor: 'white'
+                                                                }
+                                                            }],
+                                                        },
+                                                        legend: {
+                                                            display: false,
+                                                            labels: {
+                                                                fontColor: 'white',
+                                                            },
+                                                            position: 'right',
+                                                        },
+                                                        title:{
+                                                            fontColor: 'white',
+                                                        }
+                                                    }
+                                                }/>
+                                        </Col>                                        
+                                    </Row>
+                                </div> 
+                                <div className="slider-item">                      
+                                    <Row>
+                                        <Col lg="12" md="12" sm="12">
+                                            <h1 className="text-center" style={{color:'white'}}>Poin Harian Pasang Batu</h1>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col lg="12" md="12" sm="12">
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col lg="12">
+                                                <HorizontalBar data={this.state.chartDataPoinPB} width={1400} height={540} options={
+                                                    {
+                                                        responsive: true,
+                                                        maintainAspectRatio: true, 
+                                                        scales: {
+                                                            yAxes: [{
+                                                                gridLines: {
+                                                                    display: false
+                                                                },
+                                                                ticks: {
+                                                                    fontColor: 'white'
+                                                                }
+                                                            }],
+                                                            xAxes: [{
+                                                                gridLines: {
+                                                                    display: false
+                                                                },
+                                                                ticks: {
+                                                                    fontColor: 'white'
+                                                                }
+                                                            }],
+                                                        },
+                                                        legend: {
+                                                            display: false,
+                                                            labels: {
+                                                                fontColor: 'white',
+                                                            },
+                                                            position: 'right',
+                                                        },
+                                                        title:{
+                                                            fontColor: 'white',
+                                                        }
+                                                    }
+                                                }/>
+                                        </Col>                                        
+                                    </Row>
+                                </div> 
+                                <div className="slider-item">                      
+                                    <Row>
+                                        <Col lg="12" md="12" sm="12">
+                                            <h1 className="text-center" style={{color:'white'}}>Poin Harian Poles BRJ</h1>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col lg="12" md="12" sm="12">
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col lg="12">
+                                                <HorizontalBar data={this.state.chartDataPoinPolesBRJ} width={1400} height={540} options={
+                                                    {
+                                                        responsive: true,
+                                                        maintainAspectRatio: true, 
+                                                        scales: {
+                                                            yAxes: [{
+                                                                gridLines: {
+                                                                    display: false
+                                                                },
+                                                                ticks: {
+                                                                    fontColor: 'white'
+                                                                }
+                                                            }],
+                                                            xAxes: [{
+                                                                gridLines: {
+                                                                    display: false
+                                                                },
+                                                                ticks: {
+                                                                    fontColor: 'white'
+                                                                }
+                                                            }],
+                                                        },
+                                                        legend: {
+                                                            display: false,
                                                             labels: {
                                                                 fontColor: 'white',
                                                             },
