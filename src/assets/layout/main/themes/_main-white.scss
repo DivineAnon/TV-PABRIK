@@ -13,6 +13,8 @@ $app-header-logo-bg: rgba(255, 255, 255, .9);
 
   &.app-container {
     background: $app-container-bg;
+    height: 1080px;
+    width: 1920px;
   }
 
   .app-sidebar {
